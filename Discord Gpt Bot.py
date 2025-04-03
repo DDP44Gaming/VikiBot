@@ -94,18 +94,22 @@ async def chat(ctx, *, uzenet):
 @bot.command()
 async def vikirajzol(ctx, *, prompt):
     try:
+        print(f"Kép generálás indítva a következő prompttal: {prompt}")  # Debug üzenet
         response = openai.Image.create(
             prompt=prompt,
             n=1,
             size="1024x1024"
         )
         image_url = response['data'][0]['url']
+        print(f"Generált kép URL: {image_url}")  # Debug üzenet
         await ctx.send(f"🎨 Kép készül: `{prompt}` – Viki küldi hamarosan...")
         await ctx.send(image_url)
+    except openai.error.OpenAIError as e:
+        print(f"[HIBA az OpenAI API hívásnál]: {e}")  # Tovább részletes hibaüzenet
+        await ctx.send(f"🥺 Bocs, Kis-Haver, valami elromlott a kép generálásnál... {e}")
     except Exception as e:
-        print(f"[HIBA a kép generálásnál]: {e}")
-        await ctx.send("🥺 Bocs, Kis-Haver, valami elromlott a kép generálásnál...")
-
+        print(f"[Általános HIBA]: {e}")  # Egyéb hiba
+        await ctx.send(f"🥺 Bocs, Kis-Haver, valami elromlott a kép generálásnál...")
 # A meglévő RPG funkciók megmaradnak
 
 # === AJÁNLÓK ===
