@@ -1,1 +1,1 @@
-worker: python "Discord Gpt Bot.py"
+web: python "Discord Gpt Bot.py"
