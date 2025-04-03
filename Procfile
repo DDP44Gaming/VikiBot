@@ -1,0 +1,1 @@
+worker: python "Discord Gpt Bot.py"
